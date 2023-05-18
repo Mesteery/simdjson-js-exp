@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.env.*": "makefile",
+    "ace": "javascript",
+    "arm_neon.h": "c"
+  }
+}

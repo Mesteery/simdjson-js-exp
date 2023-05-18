@@ -1,0 +1,18 @@
+{
+  "name": "simdjson-linux-arm-gnueabihf",
+  "version": "0.0.0",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "arm"
+  ],
+  "main": "simdjson.linux-arm-gnueabihf.node",
+  "files": [
+    "simdjson.linux-arm-gnueabihf.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 10"
+  }
+}

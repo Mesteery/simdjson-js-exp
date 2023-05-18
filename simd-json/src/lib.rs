@@ -137,12 +137,12 @@ pub use crate::serde::{
 /// Default trait imports;
 pub mod prelude;
 
-pub mod charutils;
+mod charutils;
 #[macro_use]
 mod macros;
 mod error;
 mod numberparse;
-pub mod safer_unchecked;
+mod safer_unchecked;
 mod stringparse;
 
 use safer_unchecked::GetSaferUnchecked;
@@ -178,7 +178,7 @@ use crate::neon::stage1::{SimdInput, SIMDINPUT_LENGTH, SIMDJSON_PADDING};
 use simdutf8::basic::imp::aarch64::neon::ChunkedUtf8ValidatorImp;
 
 #[cfg(target_feature = "simd128")]
-pub mod simd128;
+mod simd128;
 #[cfg(target_feature = "simd128")]
 pub use crate::simd128::deser::*;
 #[cfg(target_feature = "simd128")]
@@ -727,10 +727,10 @@ impl AlignedBuf {
     fn capacity_overflow() -> ! {
         panic!("capacity overflow");
     }
-    pub fn capacity(&self) -> usize {
+    fn capacity(&self) -> usize {
         self.capacity
     }
-    pub unsafe fn set_len(&mut self, n: usize) {
+    unsafe fn set_len(&mut self, n: usize) {
         assert!(
             n <= self.capacity,
             "New size ({}) can not be larger then capacity ({}).",

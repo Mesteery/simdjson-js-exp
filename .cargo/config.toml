@@ -1,6 +1,7 @@
-[build]
-target = "wasm32-unknown-unknown"
+[target.wasm32-unknown-unknown]
 rustflags = ["-C", "target-feature=+simd128"]
 
-[rust]
-lld = true
+[target.aarch64-unknown-linux-musl]
+linker = "aarch64-linux-musl-gcc"
+rustflags = ["-C", "target-feature=-crt-static"]
+

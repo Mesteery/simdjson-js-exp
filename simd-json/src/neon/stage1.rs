@@ -1,7 +1,7 @@
 use crate::{static_cast_i32, Stage1Parse};
 use std::arch::aarch64::{
     int32x4_t, int8x16_t, uint8x16_t, vaddq_s32, vandq_u8, vceqq_u8, vcleq_u8, vdupq_n_s8,
-    vgetq_lane_u64, vld1q_u8, vmovq_n_u8, vmull_p64, vpaddq_u8, vqtbl1q_u8, vreinterpretq_u64_u8,
+    vgetq_lane_u64, vld1q_u8, vmovq_n_u8, vpaddq_u8, vqtbl1q_u8, vreinterpretq_u64_u8,
     vreinterpretq_u8_s8, vshrq_n_u8, vtstq_u8,
 };
 use std::mem;
@@ -66,6 +66,7 @@ impl SimdInput {
 
 impl Stage1Parse<int8x16_t> for SimdInput {
     #[cfg_attr(not(feature = "no-inline"), inline(always))]
+    #[cfg(target_feature = "pmull")]
     fn compute_quote_mask(quote_bits: u64) -> u64 {
         unsafe {
             vgetq_lane_u64(
@@ -76,6 +77,17 @@ impl Stage1Parse<int8x16_t> for SimdInput {
                 0,
             )
         }
+    }
+
+    #[cfg(not(target_feature = "pmull"))]
+    fn compute_quote_mask(mut quote_bits: u64) -> u64 {
+        quote_bits ^= quote_bits << 1;
+        quote_bits ^= quote_bits << 2;
+        quote_bits ^= quote_bits << 4;
+        quote_bits ^= quote_bits << 8;
+        quote_bits ^= quote_bits << 16;
+        quote_bits ^= quote_bits << 32;
+        quote_bits
     }
 
     /// a straightforward comparison of a mask against input

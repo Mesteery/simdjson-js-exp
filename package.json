@@ -1,6 +1,45 @@
 {
-  "type": "module",
+  "name": "simdjson",
+  "version": "0.0.0",
+  "main": "index.js",
+  "packageManager": "yarn@3.5.1",
+  "types": "index.d.ts",
+  "napi": {
+    "name": "simdjson",
+    "triples": {
+      "additional": [
+        "aarch64-apple-darwin",
+        "aarch64-linux-android",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "aarch64-pc-windows-msvc",
+        "armv7-unknown-linux-gnueabihf",
+        "x86_64-unknown-linux-musl",
+        "x86_64-unknown-freebsd",
+        "i686-pc-windows-msvc",
+        "armv7-linux-androideabi",
+        "universal-apple-darwin"
+      ]
+    }
+  },
+  "license": "MIT",
   "dependencies": {
     "benchmark": "^2.1.4"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.15.2",
+    "ava": "^5.1.1"
+  },
+  "engines": {
+    "node": ">= 10"
+  },
+  "scripts": {
+    "artifacts": "napi artifacts",
+    "build": "napi build --platform --release --js false --dts binding.d.ts",
+    "build:wasm": "cargo build --release --target wasm32-unknown-unknown --out-dir . -Z unstable-options && wasm-opt simdjson_ops.wasm -o simdjson_ops.wasm -O4",
+    "build:debug": "napi build --platform --js false --dts binding.d.ts",
+    "prepublishOnly": "napi prepublish -t npm",
+    "universal": "napi universal",
+    "version": "napi version"
   }
 }
