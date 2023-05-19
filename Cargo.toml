@@ -11,7 +11,6 @@ simd-json = "0.9.2"
 [target.'cfg(not(target_arch = "wasm32"))'.dependencies]
 napi = { version = "2.12.0", default-features = false, features = ["napi4"] }
 napi-derive = "2.12.2"
-mimalloc = { version = "0.1.37", default-features = false }
 
 [target.'cfg(not(target_arch = "wasm32"))'.build-dependencies]
 napi-build = "2.0.1"
