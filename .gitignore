@@ -1,6 +1,9 @@
-/target
+target
 Cargo.lock
 pkg/
 node_modules
 .yarn/cache
 *.node
+build
+Debug
+Release
