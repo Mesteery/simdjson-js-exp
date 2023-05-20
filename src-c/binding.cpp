@@ -1,18 +1,24 @@
 // hello.cc
-#include <node.h>
+#include <napi.h>
 
 #include "simdjson.h"
 
 namespace demo {
 
-void Method(const v8::FunctionCallbackInfo<v8::Value>& args) {
-  const auto ab = args[0].As<v8::ArrayBuffer>();
-  const auto len = ab->ByteLength();
-  const uint8_t* buf = reinterpret_cast<const uint8_t*>(ab->Data());
+Napi::Value Method(const Napi::CallbackInfo& info) {
+  Napi::Env env = info.Env();
+
+  const auto ab = info[0].As<Napi::Uint8Array>();
   std::unique_ptr<simdjson::internal::dom_parser_implementation> impl;
   simdjson::get_active_implementation()->create_dom_parser_implementation(
-      len, 0, impl);
-  impl->stage1(buf, len, simdjson::stage1_mode::regular);
+      ab.ElementLength(), 0, impl);
+  impl->stage1(ab.Data(), ab.ElementLength(), simdjson::stage1_mode::regular);
+
+  return Napi::Uint32Array::New(
+      env, impl->n_structural_indexes,
+      Napi::ArrayBuffer::New(env, impl->structural_indexes.release(),
+                             4 * impl->n_structural_indexes),
+      0);
 
   /*std::unique_ptr<v8::BackingStore> backing =
   v8::ArrayBuffer::NewBackingStore( impl->structural_indexes.release(),
@@ -24,10 +30,13 @@ void Method(const v8::FunctionCallbackInfo<v8::Value>& args) {
       ret, 0, static_cast<size_t>(impl->n_structural_indexes)));*/
 }
 
-void Initialize(v8::Local<v8::Object> exports) {
-  NODE_SET_METHOD(exports, "hello", Method);
+Napi::Object Init(Napi::Env env, Napi::Object exports) {
+  simdjson::get_active_implementation();
+  exports.Set(Napi::String::New(env, "hello"),
+              Napi::Function::New(env, Method));
+  return exports;
 }
 
-NODE_MODULE(NODE_GYP_MODULE_NAME, Initialize)
+NODE_API_MODULE(addon, Init)
 
 }  // namespace demo

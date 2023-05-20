@@ -3,10 +3,23 @@
     {
       'target_name': 'addon',
       'sources': [
-          'src-c/binding.cpp',
-          'src-c/simdjson.cpp',
-          'src-c/simdjson.h',
-        ],
+        'src-c/binding.cpp',
+        'src-c/simdjson.cpp',
+        'src-c/simdjson.h',
+      ],
+      "include_dirs": [
+        "<!@(node -p \"require('node-addon-api').include\")"
+      ],
+      'cflags': ['-fno-exceptions'],
+      'defines': ['_HAS_EXCEPTIONS=0', 'NAPI_DISABLE_CPP_EXCEPTIONS'],
+      "xcode_settings": {
+        "GCC_ENABLE_CPP_EXCEPTIONS": "NO"
+      },
+      'msvs_settings' : {
+        'VCCLCompilerTool' : {
+          'AdditionalOptions' : ['/EHs-c-']
+        },
+      },
       'configurations': {
         'Release': {
           'cflags': ['-O3', '-flto', '-march=native'],

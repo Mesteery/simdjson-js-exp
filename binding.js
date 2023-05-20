@@ -223,6 +223,4 @@ if (!nativeBinding) {
   throw new Error(`Failed to load native binding`);
 }
 
-const { findStructuralIndexes } = nativeBinding;
-
-module.exports.findStructuralIndexes = findStructuralIndexes;
+module.exports = nativeBinding;

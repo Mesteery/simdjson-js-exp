@@ -24,7 +24,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "benchmark": "^2.1.4"
+    "benchmark": "^2.1.4",
+    "node-addon-api": "^6.1.0"
   },
   "devDependencies": {
     "@napi-rs/cli": "^2.15.2",

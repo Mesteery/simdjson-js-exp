@@ -13,12 +13,9 @@ pub fn find_structural_indexes() -> () {
 
 #[cfg(not(target_arch = "wasm32"))]
 #[napi]
-pub fn find_structural_indexes(input: Uint8Array) {
-  let _ = unsafe{Deserializer::find_structural_bits(&input)};
-}
-/*pub fn find_structural_indexes(input: Uint8Array) -> Result<Uint32Array> {
+pub fn find_structural_indexes(input: Uint8Array) -> Result<Uint32Array> {
   match unsafe { Deserializer::find_structural_bits(&input) } {
     Ok(ret) => Ok(Uint32Array::new(ret)),
     Err(err) => Err(Error::new(Status::GenericFailure, SimdJsonError::generic(err).to_string())),
   }
-}*/
+}

@@ -1388,6 +1388,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-addon-api@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "node-addon-api@npm:6.1.0"
+  dependencies:
+    node-gyp: latest
+  checksum: 3a539510e677cfa3a833aca5397300e36141aca064cdc487554f2017110709a03a95da937e98c2a14ec3c626af7b2d1b6dabe629a481f9883143d0d5bff07bf2
+  languageName: node
+  linkType: hard
+
 "node-gyp@npm:latest":
   version: 9.3.1
   resolution: "node-gyp@npm:9.3.1"
@@ -1746,6 +1755,7 @@ __metadata:
     "@napi-rs/cli": ^2.15.2
     ava: ^5.1.1
     benchmark: ^2.1.4
+    node-addon-api: ^6.1.0
   languageName: unknown
   linkType: soft
 

@@ -1,14 +1,13 @@
 {
   "configurations": [
     {
-      "name": "Linux",
+      "name": "Win32",
       "includePath": ["${workspaceFolder}/**"],
-      "defines": [],
-      "compilerPath": "/usr/bin/clang",
-      "compileCommands": "${workspaceFolder}/Debug/compile_commands.json",
+      "windowsSdkVersion": "10.0.19041.0",
       "cStandard": "c17",
-      "cppStandard": "c++14",
-      "intelliSenseMode": "linux-clang-arm64"
+      "cppStandard": "c++17",
+      "intelliSenseMode": "windows-msvc-x64",
+      "compileCommands": "Release/compile_commands.json"
     }
   ],
   "version": 4
