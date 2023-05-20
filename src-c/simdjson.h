@@ -5008,7 +5008,7 @@ public:
   inline bool dump_raw_tape(std::ostream &os) const noexcept;
 
 
-private:
+//private:
   /**
    * The maximum document length this parser will automatically support.
    *

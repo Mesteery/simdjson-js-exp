@@ -9,8 +9,7 @@
         ],
       'configurations': {
         'Release': {
-          'cflags': ['-O3', '-flto'],
-          'cxxflags': ['-O3', '-flto'],
+          'cflags': ['-O3', '-flto', '-march=native'],
           'ldflags': ['-flto'],
           'msvs_settings' : {
             'VCCLCompilerTool' : {
@@ -29,7 +28,6 @@
           'conditions': [
             ["target_arch in 'ia32 x64'", {
               'cflags': ['-mavx'],
-              'cxxflags': ['-mavx'],
               'xcode_settings': {
                 'OTHER_CFLAGS': ['-mavx'],
                 'OTHER_CXXFLAGS': ['-mavx'],
