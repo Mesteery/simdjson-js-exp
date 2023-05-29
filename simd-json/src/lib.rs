@@ -535,7 +535,7 @@ impl<'de> Deserializer<'de> {
         // 6 is a heuristic number to estimate it turns out a rate of 1/6 structural characters
         // leads almost never to relocations.
         let mut structural_indexes = Vec::with_capacity(len / 6);
-        structural_indexes.push(0); // push extra root element
+        structural_indexes.push(0);
 
         let mut utf8_validator = ChunkedUtf8ValidatorImp::new();
 
@@ -564,7 +564,7 @@ impl<'de> Deserializer<'de> {
         let mut structurals: u64 = 0;
 
         let lenminus64: usize = if len < 64 { 0 } else { len - 64 };
-        let mut idx: usize = 0;
+        let mut idx: usize = 1;
         let mut error_mask: u64 = 0; // for unescaped characters within strings (ASCII code points < 0x20)
 
         while idx < lenminus64 {

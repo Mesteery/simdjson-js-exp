@@ -22,7 +22,7 @@
       },
       'configurations': {
         'Release': {
-          'cflags': ['-O3', '-flto', '-march=native'],
+          'cflags': ['-Ofast', '-flto', '-march=native'],
           'ldflags': ['-flto'],
           'msvs_settings' : {
             'VCCLCompilerTool' : {
