@@ -22,8 +22,8 @@ const ARRAY_VALUE = 4;
 const ARRAY_CONTINUE = 5;
 
 const parser = new JsonIndexer();
-const intermediateData = new Array(1025);
-const intermediateKeys = new Array(1025);
+const intermediateData = new Array(65);
+const intermediateKeys = new Array(65);
 
 export function parseJson(input) {
   const structuralIndexes = parser.findStructuralIndexes(input);

@@ -21,6 +21,7 @@
   }
 
 constexpr uint32_t DEFAULT_CAPACITY = 1000 * 1000;
+constexpr uint32_t DEFAULT_MAX_DEPTH = 64;
 
 class JsonIndexer : public Napi::ObjectWrap<JsonIndexer> {
  public:
@@ -45,9 +46,9 @@ class JsonIndexer : public Napi::ObjectWrap<JsonIndexer> {
   JsonIndexer(const Napi::CallbackInfo& info)
       : Napi::ObjectWrap<JsonIndexer>(info) {
     simdjson::get_active_implementation()->create_dom_parser_implementation(
-        DEFAULT_CAPACITY, simdjson::DEFAULT_MAX_DEPTH, implementation);
-    size_t string_capacity = SIMDJSON_ROUNDUP_N(
-        5 * DEFAULT_CAPACITY / 3 + simdjson::SIMDJSON_PADDING, 64);
+        DEFAULT_CAPACITY, DEFAULT_MAX_DEPTH, implementation);
+    size_t string_capacity =
+        SIMDJSON_ROUNDUP_N(DEFAULT_CAPACITY + simdjson::SIMDJSON_PADDING, 64);
     string_buf.reset(new uint8_t[string_capacity]);
   }
 
@@ -59,7 +60,7 @@ class JsonIndexer : public Napi::ObjectWrap<JsonIndexer> {
 
     if (implementation->capacity() < len) {
       size_t string_capacity =
-          SIMDJSON_ROUNDUP_N(5 * len / 3 + simdjson::SIMDJSON_PADDING, 64);
+          SIMDJSON_ROUNDUP_N(len + simdjson::SIMDJSON_PADDING, 64);
       string_buf.reset(new uint8_t[string_capacity]);
       TRY(implementation->set_capacity(len));
     }

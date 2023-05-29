@@ -2,7 +2,7 @@ import { readFile } from 'fs/promises';
 import Benchmark from 'benchmark';
 import { parseJson } from './simdjson.js';
 
-const bdata = await readFile('./data/large-file.json');
+const bdata = await readFile('./data/a.json');
 const data = bdata.toString();
 
 new Benchmark.Suite()
