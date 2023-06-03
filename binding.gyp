@@ -3,13 +3,11 @@
     {
       'target_name': 'addon',
       'sources': [
-        'src-c/binding.cpp',
-        'src-c/simdjson.cpp',
-        'src-c/simdjson.h',
+        'src/binding.cpp',
+        'src/simdjson.cpp',
+        'src/simdjson.h',
       ],
-      "include_dirs": [
-        "<!@(node -p \"require('node-addon-api').include\")"
-      ],
+      #'include_dirs': ["<!(node -p \"require('node-addon-api').include_dir\")"],
       'cflags': ['-fno-exceptions'],
       'defines': ['_HAS_EXCEPTIONS=0', 'NAPI_DISABLE_CPP_EXCEPTIONS'],
       "xcode_settings": {

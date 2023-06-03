@@ -1,6 +1,5 @@
-target
-Cargo.lock
-pkg/
+downtoad/target
+downtoad/Cargo.lock
 node_modules
 .yarn/cache
 *.node
@@ -8,3 +7,4 @@ build
 Debug
 Release
 .vscode
+tools/*.tar
