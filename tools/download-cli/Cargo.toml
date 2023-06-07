@@ -1,0 +1,17 @@
+[package]
+name = "download-cli"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+flate2 = "1.0"
+tar = "0.4"
+ureq = { version = "2.6", default-features = false, features = ["tls"] }
+
+[patch.crates-io]
+ring = { git = "https://github.com/Mesteery/ring", branch = "v0.16.20-wasi" }
+
+[profile.release]
+lto = "fat"
+opt-level = 3
+codegen-units = 1

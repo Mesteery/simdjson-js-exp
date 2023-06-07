@@ -1,5 +1,5 @@
-tools/downtoad/target
-tools/downtoad/Cargo.lock
+tools/download-cli/target
+tools/download-cli/Cargo.lock
 node_modules
 .yarn/cache
 *.node
